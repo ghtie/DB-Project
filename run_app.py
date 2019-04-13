@@ -16,7 +16,9 @@ app = Flask(__name__)
 
 #Define function to query database, returns result of query
 def db_query(sql):
-	cnx = mysql.connector.connect(user = 'team_17', password = '2004d2a4', port = '3306', host = 'eecslab-9.case.edu')
+	cnx = mysql.connector.connect(user = 'team_17', password = 
+'2004d2a4', port = '3306', host = 'eecslab-9.case.edu', database = 
+'team_17')
 	cursor = cnx.cursor()
 	
 	cursor.execute(sql) #sql is the command, as a string literal
@@ -28,7 +30,9 @@ def db_query(sql):
 
 #Define function to write to database
 def db_write(sql):
-	cnx = mysql.connector.connect(user = 'team_17', password = '2004d2a4', port = '3306', host = 'eecslab-9.case.edu')
+	cnx = mysql.connector.connect(user = 'team_17', password = 
+'2004d2a4', port = '3306', host = 'eecslab-9.case.edu', database = 
+'team_17')
 	cursor = cnx.cursor()
 	cursor.execute()
 	cursor.commit()
