@@ -1,8 +1,11 @@
 # application to run program from terminal
+from __future__ import print_function
+from mysql.connector import errorcode
 
 import configparser
 from flask import Flask, render_template, request
 import mysql.connector
+
 
 # read configuration from file
 config = configparser.ConfigParser()
@@ -11,23 +14,26 @@ config.read('config.ini')
 # set up application server
 app = Flask(__name__)
 
-# create a function for fetching data from database
-def sql_query(sql):
-    db = mysql.connector.connect(**config['mysql.connector'])
-    cursor = db.cursor()
-    cursor.execute(sql)
-    result = cursor.fetchall()
-    cursor.close()
-    db.close()
-    return result
+#Define function to query database, returns result of query
+def db_query(sql):
+	cnx = mysql.connector.connect(user = 'team_17', password = '2004d2a4', port = '3306', host = 'eecslab-9.case.edu')
+	cursor = cnx.cursor()
+	
+	cursor.execute(sql) #sql is the command, as a string literal
+	result = cursor.fetchall() #returns all results of the query
 
-def sql_execute(sql):
-    db = mysql.connector.connect(**config['mysql.connector'])
-    cursor = db.cursor()
-    cursor.execute(sql)
-    db.commit()
-    cursor.close()
-    db.close()
+	cursor.close()
+	cnx.close()
+	return result
+
+#Define function to write to database
+def db_write(sql):
+	cnx = mysql.connector.connect(user = 'team_17', password = '2004d2a4', port = '3306', host = 'eecslab-9.case.edu')
+	cursor = cnx.cursor()
+	cursor.execute()
+	cursor.commit()
+	cursor.close()
+	cnx.close()
 
 # not sure if this is the best app.route function to use yet
 @app.route('/')
@@ -36,3 +42,4 @@ def basic_response():
 
 if __name__ == '__main__':
     app.run()
+    #app.run(**config['app']) will probably need this one rather than app.run(
