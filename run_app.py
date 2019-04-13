@@ -38,8 +38,10 @@ def db_write(sql):
 # not sure if this is the best app.route function to use yet
 @app.route('/')
 def basic_response():
-    return "Eyyyy, the web app runs!"
+    return render_template('home.html')
+
+
 
 if __name__ == '__main__':
     app.run()
-    #app.run(**config['app']) will probably need this one rather than app.run(
+    #app.run(**config['app']) will probably need this one rather than app.run()
