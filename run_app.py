@@ -44,11 +44,11 @@ def db_write(sql):
 def basic_response():
     return render_template('home.html')
 
-# trying to get buttons to work but isnt
+# trying to get buttons to work but its jank
 @app.route('/action1', methods=['POST'])
 def button2_should_do_something():
 	if "method1" in request.form:
-		print ("You pressed this button.")
+		print ("You pressed this button.") #this didn't show up
 		return '', 400
 	return ''
 
