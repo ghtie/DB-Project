@@ -3,7 +3,7 @@ from __future__ import print_function
 from mysql.connector import errorcode
 
 import configparser
-from flask import Flask, render_template, request
+from flask import Flask, render_template, Response, request, redirect, url_for
 import mysql.connector
 
 
@@ -47,9 +47,8 @@ def basic_response():
 # trying to get buttons to work
 @app.route('/action1', methods=['method1'])
 def button2_should_do_something():
-    return render_template('home.html')
-
-
+	if request.method=='method1':
+		return ("You pressed this button.")
 
 if __name__ == '__main__':
     app.run()
