@@ -44,6 +44,11 @@ def db_write(sql):
 def basic_response():
     return render_template('home.html')
 
+# trying to get buttons to work
+@app.route('/action1', methods=['method1'])
+def button2_should_do_something():
+    return render_template('home.html')
+
 
 
 if __name__ == '__main__':
