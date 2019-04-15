@@ -44,11 +44,13 @@ def db_write(sql):
 def basic_response():
     return render_template('home.html')
 
-# trying to get buttons to work
-@app.route('/action1', methods=['method1'])
+# trying to get buttons to work but isnt
+@app.route('/action1', methods=['POST'])
 def button2_should_do_something():
-	if request.method=='method1':
-		return ("You pressed this button.")
+	if "method1" in request.form:
+		print ("You pressed this button.")
+		return '', 400
+	return ''
 
 if __name__ == '__main__':
     app.run()
