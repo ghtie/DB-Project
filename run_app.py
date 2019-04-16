@@ -44,7 +44,7 @@ def db_write(sql):
 def basic_response():
     return render_template('home.html')
 
-# trying to get buttons to work but its jank
+# sample method to access a second page
 @app.route('/action1', methods=['POST'])
 def button2_should_do_something():
 	print(request.form)
