@@ -47,10 +47,11 @@ def basic_response():
 # trying to get buttons to work but its jank
 @app.route('/action1', methods=['POST'])
 def button2_should_do_something():
-	if "method1" in request.form:
-		print ("You pressed this button.") #this didn't show up
-		return '', 400
-	return ''
+	print(request.form)
+	if "Button2" in request.form:
+		return render_template('anotherPage.html'), 400
+	else:
+		return ''
 
 if __name__ == '__main__':
     app.run()
