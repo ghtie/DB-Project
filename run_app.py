@@ -53,6 +53,15 @@ def button2_should_do_something():
 	else:
 		return ''
 
+#sample method to go back to orginal page
+@app.route('/action2', methods=['POST'])
+def button3_should_do_something():
+	print(request.form)
+	if "Button3" in request.form:
+		return render_template('home.html'), 400
+	else:
+		return ''
+
 if __name__ == '__main__':
     app.run()
     #app.run(**config['app']) will probably need this one rather than app.run()
