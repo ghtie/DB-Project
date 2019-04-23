@@ -34,7 +34,7 @@ def db_write(sql):
 '2004d2a4', port = '3306', host = 'eecslab-9.case.edu', database = 
 'team_17')
 	cursor = cnx.cursor()
-	cursor.execute()
+	cursor.execute(sql)
 	cursor.commit()
 	cursor.close()
 	cnx.close()
