@@ -39,28 +39,48 @@ def db_write(sql):
 	cursor.close()
 	cnx.close()
 
-# not sure if this is the best app.route function to use yet
 @app.route('/')
-def basic_response():
-    return render_template('home.html')
+def home():
+	return render_template('home.html')
+
+@app.route('/goToBuyPage', methods=['GET', 'POST'])
+def go_to_buy_page():
+	print(request.form)
+	if "buyButton" in request.form:
+		return render_template('buyPage.html'), 400
+	else:
+		return ''
+
+@app.route('/goToSellPage', methods=['GET', 'POST'])
+def go_to_sell_page():
+	print(request.form)
+	if "sellButton" in request.form:
+		return render_template('sellPage.html'), 400
+	else:
+		return ''
+
+# not sure if this is the best app.route function to use yet
+#@app.route('/')
+#def basic_response():
+   # return render_template('home.html')
 
 # sample method to access a second page
-@app.route('/action1', methods=['POST'])
-def button2_should_do_something():
-	print(request.form)
-	if "Button2" in request.form:
-		return render_template('anotherPage.html'), 400
-	else:
-		return ''
+ # @app.route('/action1', methods=['POST'])
+ # def button2_should_do_something():
+	# print(request.form)
+	# if "Button2" in request.form:
+		# return render_template('anotherPage.html'), 400
+	# else:
+		# return ''
 
 #sample method to go back to orginal page
-@app.route('/action2', methods=['POST'])
-def button3_should_do_something():
-	print(request.form)
-	if "Button3" in request.form:
-		return render_template('home.html'), 400
-	else:
-		return ''
+# @app.route('/action2', methods=['POST'])
+# def button3_should_do_something():
+	#print(request.form)
+	# if "Button3" in request.form:
+	#	return render_template('home.html'), 400
+	#else:
+		#return ''
 
 if __name__ == '__main__':
     app.run()
