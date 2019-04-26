@@ -9,7 +9,8 @@
         {% for swipe in template_data['swipes'] %}
         <li>
             {{ swipe[0]}} <!-- swipe_id -->
-           {{ swipe[1]}} <!-- price-->
+            {{ swipe[1]}} <!-- seller_id -->
+           {{ swipe[2]}} <!-- price-->
             <button name="buy_swipe" value="{{swipe[0]}}">buy</button>
         </li>
         {% endfor %}

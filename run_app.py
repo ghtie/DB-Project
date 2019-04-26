@@ -45,50 +45,39 @@ def go_to_buy_page():
 	print(request.form)
 	if "seeBuyerView" in request.form:
 		swipe_view_data = {}
-		return display_swipes(swipe_view_data)
-	# if request.method == 'GET':
-	# 	if request.form['buy_swipe'] == int(request.form["buy_swipe"]):
-	# 		buy_view_data = {}
-	# 		return display_swipes(buy_view_data)
-
-
-
-	# if "buy_swipe" in request.form:
-	# 	print("Hi")
-	# 	buy_view_data = {}
-	# 	swipe_id = int(request.form["buy_swipe"])
-	# 	sql = "delete from swipes where id={swipe_id}".format(swipe_id=swipe_id)
-	# 	db_write(sql)
-	# 	print("Hi")
-	# 	return display_swipes(buy_view_data)
+		return display_swipes_for_buyer(swipe_view_data)
 
 @app.route('/viewSwipes', methods=['GET', 'POST'])
 def buy_swipe():
 		print(request.form)
 		if "buy_swipe" in request.form:
-			print("Hi")
 			swipe_id = int(request.form["buy_swipe"])
-			sql = "delete from swipes where user_id={swipe_id}".format(swipe_id=swipe_id)
+			sql = "update swipes set status=1 where id={swipe_id}".format(swipe_id=swipe_id)
 			db_write(sql)
-			newsql = "select user_id, price from swipes order by price"
-			swipes = db_query(newsql)
-			print(swipes)
-			#print("Hi")
 			buy_view_data = {}
-			return display_swipes(buy_view_data)
+			return display_swipes_for_buyer(buy_view_data)
 
-def display_swipes(dictionary):
+# @app.route('/viewSwipes', methods=['GET', 'POST'])
+# def buy_swipe():
+# 		print(request.form)
+# 		if "buy_swipe" in request.form:
+# 			swipe_id = int(request.form["buy_swipe"])
+# 			sql = "delete from swipes where id={swipe_id}".format(swipe_id=swipe_id)
+# 			db_write(sql)
+# 			# newsql = "select user_idß, price from swipes order by price"
+# 			# swipes = db_query(newsql)
+# 			# print(swipes)
+# 			buy_view_data = {}
+# 			return display_swipes(buy_view_data)
+
+def display_swipes_for_buyer(dictionary):
 	dictionary = {}
-	sql = "select user_id, price from swipes order by price"
+	sql = "select id, user_id, price from swipes where status=0 order by price"
 	swipes = db_query(sql)
 	dictionary['swipes'] = swipes
 	print(swipes)
 	return render_template('buyPage.html', template_data=dictionary)
 
-# @app.route('/viewSwipes', methods=['GET', 'POST'])
-# def buy_swipe():
-# 	print(request.form)
-# 	if "buy-swipe" in request form:
 
 @app.route('/goToSellPage', methods=['GET', 'POST'])
 def go_to_sell_page():
