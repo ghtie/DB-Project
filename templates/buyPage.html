@@ -8,8 +8,9 @@
     <form action="viewSwipes" method ="post">
         {% for swipe in template_data['swipes'] %}
         <li>
-            {{ swipe[0]}}
-            {{ swipe[1]}}
+            {{ swipe[0]}} <!-- swipe_id -->
+           {{ swipe[1]}} <!-- price-->
+            <button name="buy_swipe" value="{{swipe[0]}}">buy</button>
         </li>
         {% endfor %}
     </form>
