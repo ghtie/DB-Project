@@ -31,7 +31,7 @@ def db_write(sql):
 	cnx = mysql.connector.connect(**config['mysql.connector'])
 	cursor = cnx.cursor()
 	cursor.execute(sql)
-	cursor.commit()
+	cnx.commit()
 	cursor.close()
 	cnx.close()
 
@@ -44,13 +44,51 @@ def home():
 def go_to_buy_page():
 	print(request.form)
 	if "seeBuyerView" in request.form:
-		template_data = {}
-		sql = "select user_id, price from swipes2 order by price"
-		swipes = db_query(sql)
-		template_data['swipes'] = swipes
-		print(swipes)
-		return render_template('buyPage.html', template_data=template_data)
-		#return ''
+		swipe_view_data = {}
+		return display_swipes(swipe_view_data)
+	# if request.method == 'GET':
+	# 	if request.form['buy_swipe'] == int(request.form["buy_swipe"]):
+	# 		buy_view_data = {}
+	# 		return display_swipes(buy_view_data)
+
+
+
+	# if "buy_swipe" in request.form:
+	# 	print("Hi")
+	# 	buy_view_data = {}
+	# 	swipe_id = int(request.form["buy_swipe"])
+	# 	sql = "delete from swipes where id={swipe_id}".format(swipe_id=swipe_id)
+	# 	db_write(sql)
+	# 	print("Hi")
+	# 	return display_swipes(buy_view_data)
+
+@app.route('/viewSwipes', methods=['GET', 'POST'])
+def buy_swipe():
+		print(request.form)
+		if "buy_swipe" in request.form:
+			print("Hi")
+			swipe_id = int(request.form["buy_swipe"])
+			sql = "delete from swipes where user_id={swipe_id}".format(swipe_id=swipe_id)
+			db_write(sql)
+			newsql = "select user_id, price from swipes order by price"
+			swipes = db_query(newsql)
+			print(swipes)
+			#print("Hi")
+			buy_view_data = {}
+			return display_swipes(buy_view_data)
+
+def display_swipes(dictionary):
+	dictionary = {}
+	sql = "select user_id, price from swipes order by price"
+	swipes = db_query(sql)
+	dictionary['swipes'] = swipes
+	print(swipes)
+	return render_template('buyPage.html', template_data=dictionary)
+
+# @app.route('/viewSwipes', methods=['GET', 'POST'])
+# def buy_swipe():
+# 	print(request.form)
+# 	if "buy-swipe" in request form:
 
 @app.route('/goToSellPage', methods=['GET', 'POST'])
 def go_to_sell_page():
