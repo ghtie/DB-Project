@@ -14,7 +14,11 @@ config.read('config.ini')
 # set up application server
 app = Flask(__name__)
 
-#Define function to query database, returns result of query
+# global variable that increments every time someone enters the buying page from the landing page (keeps track of guest user ids)
+guest_id_counter = -1
+x = 1
+
+# Define function to query database, returns result of query
 def db_query(sql):
 	cnx = mysql.connector.connect(**config['mysql.connector'])
 	cursor = cnx.cursor()
@@ -39,10 +43,25 @@ def db_write(sql):
 def home():
 	return render_template('home.html')
 
+@app.route('/landingPage', methods=['GET', 'POST'])
+def returnToLandingPage():
+	print(request.form)
+	if "goToLanding" in request.form:
+		global x
+		x = 1
+		#print(hi)
+		return render_template('home.html')
 
 @app.route('/goToBuyPage', methods=['GET', 'POST'])
 def go_to_buy_page():
 	print(request.form)
+	global guest_id_counter 
+	sql = "select max(id) from guest_user2"
+	num = db_query(sql) # does not work if table null: will need to add if case for empty
+	print(num[0][0])
+	guest_id_counter = num[0][0]
+	guest_id_counter = guest_id_counter + 1
+	print(guest_id_counter)
 	if "seeBuyerView" in request.form:
 		swipe_view_data = {}
 		return display_swipes_for_buyer(swipe_view_data)
@@ -51,13 +70,21 @@ def go_to_buy_page():
 def buy_swipe():
 		print(request.form)
 		if "buy_swipe" in request.form:
+			global guest_id_counter 
 			swipe_id = int(request.form["buy_swipe"])
-			sql = "update swipes set status=1 where id={swipe_id}".format(swipe_id=swipe_id)
+			sql = "update swipes2 set status=1 where id={swipe_id}".format(swipe_id=swipe_id)
 			db_write(sql)
+			global x
+			if x == 1:
+				sql2 = "insert into guest_user2 (id, name) values (%d, 'Bob')" % guest_id_counter
+				db_write(sql2)
+				x = 0
+			sql3 = "update swipes2 set guest_user_id=%d where id=%s" % (guest_id_counter, swipe_id)
+			db_write(sql3)
 			buy_view_data = {}
 			return display_swipes_for_buyer(buy_view_data)
 
-# @app.route('/viewSwipes', methods=['GET', 'POST'])
+# @app.route('/viewSwipes', methods=['GET', 'POST'])ß
 # def buy_swipe():
 # 		print(request.form)
 # 		if "buy_swipe" in request.form:
@@ -72,7 +99,7 @@ def buy_swipe():
 
 def display_swipes_for_buyer(dictionary):
 	dictionary = {}
-	sql = "select id, user_id, price from swipes where status=0 order by price"
+	sql = "select id, user_id, price from swipes2 where status=0 order by price"
 	swipes = db_query(sql)
 	dictionary['swipes'] = swipes
 	print(swipes)
