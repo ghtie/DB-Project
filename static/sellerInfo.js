@@ -4,6 +4,7 @@ function setup(){
     parseForm();
 }
 
+var error = false;
 //Parse form input
 function parseForm(){
     $("#submitButton").click(function(){
@@ -11,24 +12,31 @@ function parseForm(){
         lastname = document.getElementById("lastname").value.toLowerCase();
         caseID = document.getElementById("caseID").value.toLowerCase();
         email = document.getElementById("email").value.toLowerCase();
-        checkInput(firstname, lastname, caseID, email);
+
+        if (checkInput(firstname, lastname, caseID, email) == false){
+          sendSellerInfo();
+        }
     });
 }
 
 //Error checking for invalid input
 function checkInput(firstname, lastname, caseID, email){
-  if (firstname == ""){
-    $("#firstnameErr").html("Please enter a first name<br>");
-  }
-  if (lastname == ""){
+  if (name == ""){
     $("#lastnameErr").html("Please enter a last name<br>");
+    error = true;
   }
   if (caseID == ""){
     $("#idErr").html("Please enter a valid case ID <br>");
-  }
-  if (email == ""){
-    $("#emailErr").html("Please enter a valid email<br>");
+    error = true;
   }
 }
 
+function sendSellerInfo(){
+    $.getJSON($SCRIPT_ROOT + '/_add_seller_info', {
+        name: name,
+        id: id
+      }, function(data) {
+        $("#result").text(data.result);
+      });
+}
 //Send data to python code
