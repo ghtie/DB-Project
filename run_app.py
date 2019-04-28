@@ -117,7 +117,7 @@ def display_swipes_for_buyer(dictionary):
 def go_to_sell_page():
 	print(request.form)
 	if "seeSellerView" in request.form:
-		return render_template('sellPage.html'), 400
+		return render_template('sellerLogin.html'), 400
 	else:
 		return ''
 

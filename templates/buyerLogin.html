@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <!--<link rel="stylesheet" href="../static/index.css">-->
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+  <script type="text/javascript" src="../static/buyerInfo.js"></script>
+  <meta charset="UTF-8">
+  <title>Buyer Login</title>
+</head>
+<body>
+  <div id = "errMsg">
+  <p id = "nameErr"> </p>
+  </div>
+    <div id = "sellerLogin">
+    <form action="../run_app.py" method="post">
+      Case ID:<br>
+      <input type="text" id="name">
+      <br>
+      <div id = "button"> <button type="button" id = "submitButton">Submit</button></div>
+    </form>
+  </div>
+</body>
+</html>

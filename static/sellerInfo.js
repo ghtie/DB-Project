@@ -5,24 +5,24 @@ function setup(){
 }
 
 var error = false;
+var name = "";
+var email = "";
 //Parse form input
 function parseForm(){
     $("#submitButton").click(function(){
-        firstname = document.getElementById("firstname").value.toLowerCase();
-        lastname = document.getElementById("lastname").value.toLowerCase();
+        name = document.getElementById("name").value.toLowerCase();
         caseID = document.getElementById("caseID").value.toLowerCase();
-        email = document.getElementById("email").value.toLowerCase();
 
-        if (checkInput(firstname, lastname, caseID, email) == false){
+        if (checkInput(name, caseID) == false){
           sendSellerInfo();
         }
     });
 }
 
 //Error checking for invalid input
-function checkInput(firstname, lastname, caseID, email){
+function checkInput(name, caseID){
   if (name == ""){
-    $("#lastnameErr").html("Please enter a last name<br>");
+    $("#nameErr").html("Please enter a name<br>");
     error = true;
   }
   if (caseID == ""){
