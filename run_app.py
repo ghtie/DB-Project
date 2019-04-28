@@ -59,7 +59,7 @@ def go_to_buy_page():
 	sql = "select max(id) from guest_user"
 	num = db_query(sql) # does not work if table null: will need to add if case for empty
 	print(num[0][0])
-	if num == None:
+	if num[0][0] is None:
 		guest_id_counter = -1
 	else:
 		guest_id_counter = num[0][0]
