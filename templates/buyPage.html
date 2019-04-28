@@ -1,16 +1,16 @@
 <!-- html templete you should reach when button 2 is pressed.-->
 <html>
     <head>
-        <title>Another page.</title>
-        <p> You reached buy page.</p>
+        <title>Buyer View.</title>
+        <p> Buy some swipes.</p>
     </head>
 
     <form action="viewSwipes" method ="post">
         {% for swipe in template_data['swipes'] %}
         <li>
             {{ swipe[0]}} <!-- swipe_id -->
-            {{ swipe[1]}} <!-- seller_id -->
-           {{ swipe[2]}} <!-- price-->
+            {{ swipe[1]}} <!-- quantity -->
+            {{ swipe[2]}} <!-- price -->
             <button name="buy_swipe" value="{{swipe[0]}}">buy</button>
         </li>
         {% endfor %}
