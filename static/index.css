@@ -1,0 +1,14 @@
+header {
+  font-family: sans-serif;
+  font: Avantgarde;
+  font-weight: bold;
+  color: #FFF8F0;
+}
+
+body {
+  font-family: sans-serif;
+  font-weight: lighter;
+  font-size: 14px;
+  background-color: #9DD9D2;
+  padding-top: 35px;
+}
