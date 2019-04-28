@@ -56,10 +56,13 @@ def returnToLandingPage():
 def go_to_buy_page():
 	print(request.form)
 	global guest_id_counter 
-	sql = "select max(id) from guest_user2"
+	sql = "select max(id) from guest_user"
 	num = db_query(sql) # does not work if table null: will need to add if case for empty
 	print(num[0][0])
-	guest_id_counter = num[0][0]
+	if num == None:
+		guest_id_counter = -1
+	else:
+		guest_id_counter = num[0][0]
 	guest_id_counter = guest_id_counter + 1
 	print(guest_id_counter)
 	if "seeBuyerView" in request.form:
@@ -72,14 +75,14 @@ def buy_swipe():
 		if "buy_swipe" in request.form:
 			global guest_id_counter 
 			swipe_id = int(request.form["buy_swipe"])
-			sql = "update swipes2 set status=1 where id={swipe_id}".format(swipe_id=swipe_id)
+			sql = "update swipes set status=1 where id={swipe_id}".format(swipe_id=swipe_id)
 			db_write(sql)
 			global x
 			if x == 1:
-				sql2 = "insert into guest_user2 (id, name) values (%d, 'Bob')" % guest_id_counter
+				sql2 = "insert into guest_user (id, name) values (%d, 'Bob')" % guest_id_counter
 				db_write(sql2)
 				x = 0
-			sql3 = "update swipes2 set guest_user_id=%d where id=%s" % (guest_id_counter, swipe_id)
+			sql3 = "update swipes set guest_user_id=%d where id=%s" % (guest_id_counter, swipe_id)
 			db_write(sql3)
 			buy_view_data = {}
 			return display_swipes_for_buyer(buy_view_data)
@@ -99,7 +102,7 @@ def buy_swipe():
 
 def display_swipes_for_buyer(dictionary):
 	dictionary = {}
-	sql = "select id, user_id, price from swipes2 where status=0 order by price"
+	sql = "select id, user_id, price from swipes where status=0 order by price"
 	swipes = db_query(sql)
 	dictionary['swipes'] = swipes
 	print(swipes)
