@@ -6,14 +6,22 @@
     </head>
 
     <form action="viewSwipes" method ="post">
-        {% for swipe in template_data['swipes'] %}
-        <li>
-            {{ swipe[0]}} <!-- swipe_id -->
-            {{ swipe[1]}} <!-- quantity -->
-            {{ swipe[2]}} <!-- price -->
-            <button name="buy_swipe" value="{{swipe[0]}}">buy</button>
-        </li>
-        {% endfor %}
+        <p>Average Swipe Price: {{ dataAvg }}</p>
+        <p>Average Swipe Price: {{ dataSum }}</p>
+        {% if template_data['swipes']|length == 0 %}
+        <p style="color: red;">No more swipes!</p>
+        {% else %}
+        <ul>
+            {% for swipe in template_data['swipes'] %}
+            <li>
+                {{ swipe[0]}} <!-- swipe_id -->
+                {{ swipe[1]}} <!-- quantity -->
+                {{ swipe[2]}} <!-- price -->
+                <button name="buy_swipe" value="{{swipe[0]}}">buy</button>
+            </li>
+            {% endfor %}
+        </ul>
+        {% endif %}
     </form>
 
     <form action="landingPage" method="post">
