@@ -121,6 +121,12 @@ def go_to_sell_page():
 	else:
 		return ''
 
+@app.route('/_add_seller_info')
+def add_seller_info():
+    name = request.args.get('name', 0, type=string)
+    id = request.args.get('id', 0, type=string)
+    return jsonify(result=name + " " + id)
+
 if __name__ == '__main__':
     app.run()
     #app.run(**config['app']) will probably need this one rather than app.run()
