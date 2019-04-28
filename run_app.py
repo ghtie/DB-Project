@@ -102,7 +102,7 @@ def buy_swipe():
 
 def display_swipes_for_buyer(dictionary):
 	dictionary = {}
-	sql = "select id, user_id, price from swipes where status=0 order by price"
+	sql = "select id, quantity, price from swipes where status=0 order by price"
 	swipes = db_query(sql)
 	dictionary['swipes'] = swipes
 	print(swipes)
