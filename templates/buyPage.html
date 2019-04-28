@@ -8,20 +8,26 @@
     <form action="viewSwipes" method ="post">
         <p>Average Price of Swipe for Sale: {{ dataAvg }}</p>
         <p>Total Number of Swipes for Sale: {{ dataSum }}</p>
-        {% if template_data['swipes']|length == 0 %}
-        <p style="color: red;">No more swipes!</p>
-        {% else %}
-        <ul>
-            {% for swipe in template_data['swipes'] %}
-            <li>
-                {{ swipe[0]}} <!-- swipe_id -->
-                {{ swipe[1]}} <!-- quantity -->
-                {{ swipe[2]}} <!-- price -->
-                <button name="buy_swipe" value="{{swipe[0]}}">buy</button>
-            </li>
-            {% endfor %}
-        </ul>
-        {% endif %}
+
+        <table style="width:50%">
+            <tr>
+                <th>Swipe ID</th>
+                <th>Quantity</th>
+                <th>Total Price</th>
+            </tr>
+            {% if template_data['swipes']|length == 0 %}
+            <p style="color: red;">No more swipes!</p>
+            {% else %}
+                {% for swipe in template_data['swipes'] %}
+                <tr>
+                    <th>{{ swipe[0]}}</th> <!-- swipe_id -->
+                    <th>{{ swipe[1]}}</th> <!-- quantity -->
+                    <th>{{ swipe[2]}}</th> <!-- price -->
+                    <th><button name="buy_swipe" value="{{swipe[0]}}">buy</button></th>
+                </tr>
+                {% endfor %}
+            {% endif %}
+        </table>
     </form>
 
     <form action="landingPage" method="post">
