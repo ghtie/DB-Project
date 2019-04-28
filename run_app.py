@@ -104,9 +104,13 @@ def display_swipes_for_buyer(dictionary):
 	dictionary = {}
 	sql = "select id, quantity, price from swipes where status=0 order by price"
 	swipes = db_query(sql)
+	sql2 = "select avg(price), sum(quantity) from swipes where status=0"
+	data = db_query(sql2)
+	dataAvg = data[0][0]
+	dataSum = data[0][1]
 	dictionary['swipes'] = swipes
 	print(swipes)
-	return render_template('buyPage.html', template_data=dictionary)
+	return render_template('buyPage.html', template_data=dictionary, dataAvg=dataAvg, dataSum=dataSum)
 
 
 @app.route('/goToSellPage', methods=['GET', 'POST'])
