@@ -150,7 +150,6 @@ def add_swipe_listing():
 		price = int(request.form["price"])
 		sql = "insert into swipes (user_id, price, quantity) values (%s, %s, %s)"
 		val = (id, price, quantity)
-		print(id + " " + str(price) + " " + str(quantity))
 		db_insert(sql, val)
 		return render_template('sellerLogin.html'), 400
 
