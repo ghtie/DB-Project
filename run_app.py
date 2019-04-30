@@ -17,7 +17,6 @@ app = Flask(__name__)
 # global variable that increments every time someone enters the buying page from the landing page (keeps track of guest user ids)
 guest_id_counter = -1
 x = 1
-current_user = ""
 
 # Define function to query database, returns result of query
 def db_query(sql):
@@ -135,7 +134,6 @@ def go_to_sell_page():
 def add_seller_info():
 	if "sendSellerInfo" in request.form:
 		name = str(request.form["name"])
-		current_user = name
 		id = str(request.form["caseID"])
 		sql = "insert into user (name, id) values (%s, %s)"
 		val = (name, id)
