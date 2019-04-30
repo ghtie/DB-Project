@@ -3,17 +3,18 @@
     <head>
         <title>Buyer View</title>
         <div class = "center">
-                <p> Buy your swipes here!</p>
+                <h1> Buy your swipes here!</h1>
                 <link rel="stylesheet" href="../static/index.css">
             </head>
             <form action="viewSwipes" method ="post">
-                <p>Average Price of Swipe for Sale: {{ dataAvg }}</p>
+                <p>Average Price of Swipe for Sale: ${{ '%.2f'%dataAvg }}</p>
                 <p>Total Number of Swipes for Sale: {{ dataSum }}</p>
 
                 <table id="buy">
                     <tr>
                         <th>Swipe ID</th>
                         <th>Quantity</th>
+                        <th>Price Per Swipe</th>
                         <th>Total Price</th>
                         <th>Purchase</th>
                     </tr>
@@ -24,7 +25,8 @@
                         <tr>
                             <td>{{ swipe[0]}}</td> <!-- swipe_id -->
                             <td>{{ swipe[1]}}</td> <!-- quantity -->
-                            <td>{{ swipe[2]}}</td> <!-- price -->
+                            <td>${{ '%.2f'%(swipe[2]/swipe[1]) }}</td>
+                            <td>${{ swipe[2]}}</td> <!-- price -->
                             <td><button name="buy_swipe" value="{{swipe[0]}}">buy</button></td>
                         </tr>
                         {% endfor %}
@@ -33,7 +35,7 @@
             </form>
 
             <form action="landingPage" method="post">
-                <button name="goToLanding" value="goLand">Take me back to the start.</button>
+                <button name="goToLanding" value="goLand">Go to Home Page</button>
             </form>
         </div>
 
