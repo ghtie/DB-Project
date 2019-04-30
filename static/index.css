@@ -17,6 +17,7 @@ table {
 	font-family: sans-serif;
 	border-collapse: collapse;
 	width: 50%;
+	margin: auto;
 }
 
 td, th {
@@ -37,6 +38,8 @@ th {
 }
 
 .center {
-	margin: auto;
-	text-align: center;
+	/*margin-left: auto;
+	margin-right: auto;
+	margin: auto;*/
+	 text-align: center;
 }
