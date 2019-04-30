@@ -9,18 +9,18 @@
 </head>
 <body>
 
-  <div id = "searchSection">
-    <form action="../RMPLookup.py" method="post">
+  <div id = "listingInfo">
+    <form action="submitSwipes" method="post">
       Case ID:<br>
-      <input type="text" id="caseID">
+      <input type="text" name="caseID" id="caseID" value="{{request.form.name}}">
       <br>
       Quantity:<br>
-      <input type="text" id="quantity">
+      <input type="text" name="quantity" id="quantity" value="{{request.form.quantity}}">
       <br>
       Price:<br>
-      <input type="text" id="price">
+      <input type="text" name="price" id="price" value="{{request.form.price}}">
       <br><br>
-      <div id = "button"> <button type="button" id = "submitSwipeButton">Submit Swipes</button></div>
+      <button name="sendListing" id = "submitSwipeButton">Submit Swipes</button>
     </form>
   </div>
 </body>
