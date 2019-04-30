@@ -13,24 +13,25 @@ body {
   padding-top: 35px;
 }
 
-table {
+#buy {
 	font-family: sans-serif;
 	border-collapse: collapse;
 	width: 50%;
 }
 
-td, th {
-	border: 1px, solid #ddd;
+#buy td, #buy th {
+	border: 1px solid #ddd;
 	padding: 8px;
 }
 
-tr:nth-child(even){background-color: #f2f2f2;}
-tr:hover {background-color: #ddd;}
+#buy tr:nth-child(even){background-color: LightSlateGrey;}
+#buy tr:nth-child(odd){background-color: #a8b3bd;}
+#buy tr:hover {background-color: #d3d9de;}
 
-th {
+#buy th {
 	padding-top: 12px;
 	padding-bottom: 12px;
 	text-align: left;
-	background-color: white;
-	color: blueviolet;
+	background-color: DarkSlateGray;
+	color: White;
 }

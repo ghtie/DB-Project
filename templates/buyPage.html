@@ -9,7 +9,7 @@
         <p>Average Price of Swipe for Sale: {{ dataAvg }}</p>
         <p>Total Number of Swipes for Sale: {{ dataSum }}</p>
 
-        <table style="width:50%">
+        <table id="buy">
             <tr>
                 <th>Swipe ID</th>
                 <th>Quantity</th>
@@ -20,10 +20,10 @@
             {% else %}
                 {% for swipe in template_data['swipes'] %}
                 <tr>
-                    <th>{{ swipe[0]}}</th> <!-- swipe_id -->
-                    <th>{{ swipe[1]}}</th> <!-- quantity -->
-                    <th>{{ swipe[2]}}</th> <!-- price -->
-                    <th><button name="buy_swipe" value="{{swipe[0]}}">buy</button></th>
+                    <td>{{ swipe[0]}}</td> <!-- swipe_id -->
+                    <td>{{ swipe[1]}}</td> <!-- quantity -->
+                    <td>{{ swipe[2]}}</td> <!-- price -->
+                    <td><button name="buy_swipe" value="{{swipe[0]}}">buy</button></td>
                 </tr>
                 {% endfor %}
             {% endif %}
