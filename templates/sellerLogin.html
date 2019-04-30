@@ -16,16 +16,15 @@
   </div>
   <div id = "sellerLogin">
 
-    <form action="../run_app.py" method="post">
+    <form action="createListing" method="post">
       Name:<br>
-      <input type="text" id="lastname">
+      <input type="text" name= "name" id="name" value="{{request.form.name}}">
       <br>
       Case ID:<br>
-      <input type="text" id="caseID">
+      <input type="text" name="caseID" id="caseID" value="{{request.form.caseID}}">
       <br>
       <br><br>
-      <div id = "button"> <button type="button" id = "submitButton">Submit</button></div>
-      <span id=result></span>
+      <button name="sendSellerInfo" id = "submitButton">Submit</button>
     </form>
   </div>
 </body>
