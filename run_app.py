@@ -1,6 +1,7 @@
 # application to run program from terminal
 from __future__ import print_function
 from mysql.connector import errorcode
+from decimal import Decimal
 
 import configparser
 from flask import Flask, render_template, Response, request, redirect, url_for
@@ -145,7 +146,7 @@ def add_swipe_listing():
 	if "sendListing" in request.form:
 		id = str(request.form["caseID"])
 		quantity = int(request.form["quantity"])
-		price = int(request.form["price"])
+		price = Decimal(request.form["price"])
 		sql = "insert into swipes (user_id, price, quantity) values (%s, %s, %s)"
 		val = (id, price, quantity)
 		db_insert(sql, val)
