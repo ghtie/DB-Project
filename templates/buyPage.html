@@ -1,39 +1,41 @@
 <!-- html templete you should reach when button 2 is pressed.-->
 <html>
     <head>
-        <title>Buyer View.</title>
-        <p> Buy some swipes.</p>
-        <link rel="stylesheet" href="../static/index.css">
-    </head>
-    <form action="viewSwipes" method ="post">
-        <p>Average Price of Swipe for Sale: {{ dataAvg }}</p>
-        <p>Total Number of Swipes for Sale: {{ dataSum }}</p>
+        <title>Buyer View</title>
+        <div class = "center">
+                <p> Buy your swipes here!</p>
+                <link rel="stylesheet" href="../static/index.css">
+            </head>
+            <form action="viewSwipes" method ="post">
+                <p>Average Price of Swipe for Sale: {{ dataAvg }}</p>
+                <p>Total Number of Swipes for Sale: {{ dataSum }}</p>
 
-        <table id="buy">
-            <tr>
-                <th>Swipe ID</th>
-                <th>Quantity</th>
-                <th>Total Price</th>
-                <th></th>
-            </tr>
-            {% if template_data['swipes']|length == 0 %}
-            <p style="color: red;">No more swipes!</p>
-            {% else %}
-                {% for swipe in template_data['swipes'] %}
-                <tr>
-                    <td>{{ swipe[0]}}</td> <!-- swipe_id -->
-                    <td>{{ swipe[1]}}</td> <!-- quantity -->
-                    <td>{{ swipe[2]}}</td> <!-- price -->
-                    <td><button name="buy_swipe" value="{{swipe[0]}}">buy</button></td>
-                </tr>
-                {% endfor %}
-            {% endif %}
-        </table>
-    </form>
+                <table id="buy">
+                    <tr>
+                        <th>Swipe ID</th>
+                        <th>Quantity</th>
+                        <th>Total Price</th>
+                        <th></th>
+                    </tr>
+                    {% if template_data['swipes']|length == 0 %}
+                    <p style="color: red;">No more swipes!</p>
+                    {% else %}
+                        {% for swipe in template_data['swipes'] %}
+                        <tr>
+                            <td>{{ swipe[0]}}</td> <!-- swipe_id -->
+                            <td>{{ swipe[1]}}</td> <!-- quantity -->
+                            <td>{{ swipe[2]}}</td> <!-- price -->
+                            <td><button name="buy_swipe" value="{{swipe[0]}}">buy</button></td>
+                        </tr>
+                        {% endfor %}
+                    {% endif %}
+                </table>
+            </form>
 
-    <form action="landingPage" method="post">
-        <button name="goToLanding" value="goLand">Take me back to the start.</button>
-    </form>
+            <form action="landingPage" method="post">
+                <button name="goToLanding" value="goLand">Take me back to the start.</button>
+            </form>
+        </div>
 
 </html>
     
