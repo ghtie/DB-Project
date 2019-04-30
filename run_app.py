@@ -17,12 +17,13 @@ app = Flask(__name__)
 # global variable that increments every time someone enters the buying page from the landing page (keeps track of guest user ids)
 guest_id_counter = -1
 x = 1
+current_user = ""
 
 # Define function to query database, returns result of query
 def db_query(sql):
 	cnx = mysql.connector.connect(**config['mysql.connector'])
 	cursor = cnx.cursor()
-	
+
 	cursor.execute(sql) #sql is the command, as a string literal
 	result = cursor.fetchall() #returns all results of the query
 
@@ -35,6 +36,15 @@ def db_write(sql):
 	cnx = mysql.connector.connect(**config['mysql.connector'])
 	cursor = cnx.cursor()
 	cursor.execute(sql)
+	cnx.commit()
+	cursor.close()
+	cnx.close()
+
+#Funtion that inserts into a table
+def db_insert(sql, val):
+	cnx = mysql.connector.connect(**config['mysql.connector'])
+	cursor = cnx.cursor()
+	cursor.execute(sql, val)
 	cnx.commit()
 	cursor.close()
 	cnx.close()
@@ -55,7 +65,7 @@ def returnToLandingPage():
 @app.route('/goToBuyPage', methods=['GET', 'POST'])
 def go_to_buy_page():
 	print(request.form)
-	global guest_id_counter 
+	global guest_id_counter
 	sql = "select max(id) from guest_user"
 	num = db_query(sql) # does not work if table null: will need to add if case for empty
 	print(num[0][0])
@@ -73,7 +83,7 @@ def go_to_buy_page():
 def buy_swipe():
 		print(request.form)
 		if "buy_swipe" in request.form:
-			global guest_id_counter 
+			global guest_id_counter
 			swipe_id = int(request.form["buy_swipe"])
 			sql = "update swipes set status=1 where id={swipe_id}".format(swipe_id=swipe_id)
 			db_write(sql)
@@ -121,11 +131,29 @@ def go_to_sell_page():
 	else:
 		return ''
 
-@app.route('/_add_seller_info')
+@app.route('/createListing', methods=['GET', 'POST'])
 def add_seller_info():
-    name = request.args.get('name', 0, type=string)
-    id = request.args.get('id', 0, type=string)
-    return jsonify(result=name + " " + id)
+	if "sendSellerInfo" in request.form:
+		name = str(request.form["name"])
+		current_user = name
+		id = str(request.form["caseID"])
+		sql = "insert into user (name, id) values (%s, %s)"
+		val = (name, id)
+		db_insert(sql, val)
+		return render_template('sellerList.html'), 400
+
+@app.route('/submitSwipes', methods=['GET', 'POST'])
+def add_swipe_listing():
+	if "sendListing" in request.form:
+		id = str(request.form["caseID"])
+		quantity = int(request.form["quantity"])
+		price = int(request.form["price"])
+		sql = "insert into swipes (user_id, price, quantity) values (%s, %s, %s)"
+		val = (id, price, quantity)
+		print(id + " " + str(price) + " " + str(quantity))
+		db_insert(sql, val)
+		return render_template('sellerLogin.html'), 400
+
 
 if __name__ == '__main__':
     app.run()
