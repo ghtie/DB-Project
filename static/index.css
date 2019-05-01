@@ -1,52 +1,35 @@
 /* File: buyPage.html
-   Programmers: Ben Baierl, Drew Heald, Gloria Tie, and Madison Lucas
-   This is the CSS specifications to format all the HTML templates. */
-   * { box-sizing: border-box }
-
-   body{
-     margin:0;
-     padding:0;
-     color: white;
-     font-family:sans-serif;
-     font-size:160%;
-   }
-   div{
-       padding: 4% 10%;
-   }
-   footer{
-     background-color:#E2E0CA;
-     min-height: 40px;
-   }
-   .one{
-     background-color: #013A6B;
-     background-image: -webkit-linear-gradient(30deg, #106576 50%, #12C9C8 50%);
-     min-height: 100%;
-   }
-/* header {
-  font-family: sans-serif;
-  font: Avantgarde;
-  font-weight: bold;
-  color: #FFF8F0;
-} */
+Programmers: Ben Baierl, Drew Heald, Gloria Tie, and Madison Lucas
+This is the CSS specifications to format all the HTML templates. */
+* { box-sizing: border-box }
+div{
+  padding: 4% 10%;
+  text-align: center;
+}
+.one{
+  background-image: -webkit-linear-gradient(30deg, #106576 50%, #12C9C8 50%);
+  min-height: 100%;
+  min-width: 100%;
+}
 
 body {
   font-family: sans-serif;
   font-weight: lighter;
   font-size: 14px;
-  background-color: #E2E0CA;
-  padding-top: 35px;
+  color: white;
+  background-color: #12C9C8;
 }
 
 table {
-	font-family: sans-serif;
-	border-collapse: collapse;
-	width: 50%;
-	margin: auto;
+  font-family: sans-serif;
+  border-collapse: collapse;
+  width: 50%;
+  margin: auto;
 }
 
 td, th {
-	border: 1px solid #ddd;
-	padding: 8px;
+  border: 1px solid #ddd;
+  padding: 8px;
 }
 
 tr:nth-child(even){background-color: LightSlateGrey;}
@@ -54,40 +37,40 @@ tr:nth-child(odd){background-color: #a8b3bd;}
 tr:hover {background-color: #d3d9de;}
 
 th {
-	padding-top: 12px;
-	padding-bottom: 12px;
-	text-align: left;
-	background-color: DarkSlateGray;
-	color: White;
+  padding-top: 12px;
+  padding-bottom: 12px;
+  text-align: left;
+  background-color: DarkSlateGray;
+  color: White;
 }
 
 button {
-	background-color: white;
-	border: 2px solid #e7e7e7;
-	color: black;
-	padding: 8px 16px;
-	text-align: center;
-	display: inline-block;
-	font-size: 14px;
-	margin: 4px 2px;
-	transition-duration: 0.4s;
-	cursor: pointer;
-	border-radius: 12px;
+  background-color: white;
+  border: 2px solid #e7e7e7;
+  color: black;
+  padding: 8px 16px;
+  text-align: center;
+  display: inline-block;
+  font-size: 14px;
+  margin: 4px 2px;
+  transition-duration: 0.4s;
+  cursor: pointer;
+  border-radius: 12px;
 }
 
 button:hover {background-color: #e7e7e7}
 
 pre {
-	animation: cshift 5s infinite;
+  animation: cshift 5s infinite;
 }
 
 @keyframes cshift{
-	50% {color: yellow}
+  50% {color: yellow}
 }
 
 .center {
-	/*margin-left: auto;
-	margin-right: auto;
-	margin: auto;*/
-	 text-align: center;
+  /*margin-left: auto;
+  margin-right: auto;
+  margin: auto;*/
+  text-align: center;
 }
