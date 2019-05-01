@@ -1,35 +1,42 @@
+<!-- File: sellerLogin.html
+     Programmers: Ben Baierl, Drew Heald, Gloria Tie, and Madison Lucas
+     This is the html template to display the prompt for the seller to enter their ID. -->
+
 <!DOCTYPE html>
 <html lang="en">
-<head>
-  <link rel="stylesheet" href="../static/index.css">
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
-  <script type="text/javascript" src="../static/sellerInfo.js">
-  </script>
-  <meta charset="UTF-8">
-  <title>Seller Login</title>
-</head>
-<body>
-  <div id = "errMsg">
-  <p id = "nameErr"> </p>
-  <p id = "idErr"> </p>
-  </div>
-  <div id = "sellerLogin">
+  <head>
+    <link rel="stylesheet" href="../static/index.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+    <script type="text/javascript" src="../static/sellerInfo.js">
+    </script>
+    <meta charset="UTF-8">
+    <title>Seller Login</title>
+  </head>
 
-    <form action="createListing" method="post">
-      Name:<br>
-      <input type="text" name= "name" id="name" value="{{request.form.name}}">
-      <br>
-      Case ID:<br>
-      <input type="text" name="caseID" id="caseID" value="{{request.form.caseID}}">
-      <br>
-      <br><br>
-      <button name="sendSellerInfo" id = "submitButton">Submit</button>
-    </form>
+  <body>
+    <div id = "errMsg">
+    <p id = "nameErr"> </p>
+    <p id = "idErr"> </p>
+    </div>
+    <div id = "sellerLogin">
 
-    <form action="landingPage" method="post">
-        <button name="goToLanding" value="goHome">Home Page</button>
-    </form>
+      <!-- This form will trigger the method in run_app.py that will keep track of the seller ID. -->
+      <form action="createListing" method="post">
+        Name:<br>
+        <input type="text" name= "name" id="name" value="{{request.form.name}}">
+        <br>
+        Case ID:<br>
+        <input type="text" name="caseID" id="caseID" value="{{request.form.caseID}}">
+        <br>
+        <br><br>
+        <button name="sendSellerInfo" id = "submitButton">Submit</button>
+      </form>
 
-  </div>
-</body>
+      <!-- This form will trigger the method in run_app.py that will render the landing page. -->
+      <form action="landingPage" method="post">
+          <button name="goToLanding" value="goHome">Home Page</button>
+      </form>
+
+    </div>
+  </body>
 </html>
