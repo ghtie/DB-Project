@@ -77,7 +77,7 @@ def go_to_buy_page():
 	print(guest_id_counter)
 	if "seeBuyerView" in request.form:
 		swipe_view_data = {}
-		return display_swipes_for_buyer(swipe_view_data)
+		return display_swipes_for_buyer(swipe_view_data, guest_id_counter=guest_id_counter)
 
 @app.route('/viewSwipes', methods=['GET', 'POST'])
 def buy_swipe():
@@ -95,7 +95,7 @@ def buy_swipe():
 			sql3 = "update swipes set guest_user_id=%d where id=%s" % (guest_id_counter, swipe_id)
 			db_write(sql3)
 			buy_view_data = {}
-			return display_swipes_for_buyer(buy_view_data)
+			return display_swipes_for_buyer(buy_view_data, guest_id_counter=guest_id_counter)
 
 # @app.route('/viewSwipes', methods=['GET', 'POST'])ß
 # def buy_swipe():
@@ -110,7 +110,7 @@ def buy_swipe():
 # 			buy_view_data = {}
 # 			return display_swipes(buy_view_data)
 
-def display_swipes_for_buyer(dictionary):
+def display_swipes_for_buyer(dictionary, guest_id_counter):
 	dictionary = {}
 	sql = "select id, quantity, price from swipes where status=0 order by price"
 	swipes = db_query(sql)
@@ -120,7 +120,7 @@ def display_swipes_for_buyer(dictionary):
 	dataSum = data[0][1]
 	dictionary['swipes'] = swipes
 	print(swipes)
-	return render_template('buyPage.html', template_data=dictionary, dataAvg=dataAvg, dataSum=dataSum)
+	return render_template('buyPage.html', template_data=dictionary, dataAvg=dataAvg, dataSum=dataSum, guest_id_counter=guest_id_counter)
 
 
 @app.route('/goToSellPage', methods=['GET', 'POST'])
