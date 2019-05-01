@@ -18,14 +18,14 @@
 
       <!-- This form will trigger the method in run_app.py that posts swipes for sale to the database. -->
       <form action="submitSwipes" method="post">
-        Case ID:<br>
+        Case ID (abc123):<br>
         <input type="text" name="caseID" id="caseID" value="{{request.form.caseID}}">
-        <br>
+        <br><br>
         Quantity:<br>
         <input type="text" name="quantity" id="quantity" value="{{request.form.quantity}}">
-        <br>
+        <br><br>
         Total Listing Price:<br>
-        <input type="text" name="price" id="price" value="{{request.form.price}}">
+        $<input type="text" name="price" id="price" value="{{request.form.price}}">
         <br><br>
         <button name="sendListing" id = "submitSwipeButton">Submit Swipes</button>
       </form>
