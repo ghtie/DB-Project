@@ -14,6 +14,7 @@
 
   <body>
     <div id = "listingInfo">
+	<h2>List Swipes for Sale</h2>
 
       <!-- This form will trigger the method in run_app.py that posts swipes for sale to the database. -->
       <form action="submitSwipes" method="post">
@@ -23,7 +24,7 @@
         Quantity:<br>
         <input type="text" name="quantity" id="quantity" value="{{request.form.quantity}}">
         <br>
-        Price:<br>
+        Total Listing Price:<br>
         <input type="text" name="price" id="price" value="{{request.form.price}}">
         <br><br>
         <button name="sendListing" id = "submitSwipeButton">Submit Swipes</button>

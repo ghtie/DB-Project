@@ -17,12 +17,15 @@
     <!-- This form will trigger the method in run_app.py that will re-render the seller-view
          page when a swipe is poster or a seller logs-in. -->
     <div id = "swipeSellerInfo">
+	<h1>Here are your listed swipes!</h1>
+	
       <form action="viewSellerSwipes" method="post">
         <table id="delete">
             <tr>
                 <th>Quantity</th>
                 <th>Price Per Swipe</th>
 				<th>Total Price</th>
+				<th>Delete</th>
             </tr>
 
             {% if template_data['swipes']|length == 0 %}
