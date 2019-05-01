@@ -8,6 +8,7 @@ from decimal import Decimal
 
 import configparser
 from flask import Flask, render_template, Response, request, redirect, url_for
+from wtforms import Form, BooleanField, StringField, PasswordField, validators
 import mysql.connector
 
 # This reads the configuration from file corresponding file.
@@ -130,12 +131,17 @@ def add_seller_info():
 	if "sendSellerInfo" in request.form:
 		name = str(request.form["name"])
 		id = str(request.form["caseID"])
-		sql = "select count(1) from user where ID = '%s'" %(id,)
-		check_duplicate = db_query(sql)
-		if (check_duplicate[0][0] == 0):
-			sql2 = "insert into user (name, ID) values ('%s', '%s')" %(name, id)
-			db_write(sql2)
-		return render_template('sellerList.html', name=name, id=id), 400
+		#Error checking
+		if (name == "" or id == ""):
+			nameErr = "Please fill out all fields"
+			return render_template('sellerLogin.html'), 400
+		else:
+			sql = "select count(1) from user where ID = '%s'" %(id,)
+			check_duplicate = db_query(sql)
+			if (check_duplicate[0][0] == 0):
+				sql2 = "insert into user (name, ID) values ('%s', '%s')" %(name, id)
+				db_write(sql2)
+			return render_template('sellerList.html', name=name, id=id), 400
 
 # This is the route to post the swipe a seller enters to sell.
 @app.route('/submitSwipes', methods=['GET', 'POST'])
@@ -146,6 +152,7 @@ def add_swipe_listing():
 	if "sendListing" in request.form:
 		quantity = int(request.form["quantity"])
 		price = Decimal(request.form["price"])
+		#Error checking
 		sql = "insert into swipes (user_id, price, quantity) values ('%s', %s, %s)" %(user_id, price, quantity)
 		db_write(sql)
 		return display_swipes_for_seller(seller_view_data, user_id=user_id)
