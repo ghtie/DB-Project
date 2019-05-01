@@ -22,6 +22,7 @@
             <tr>
                 <th>Quantity</th>
                 <th>Price Per Swipe</th>
+				<th>Total Price</th>
             </tr>
 
             {% if template_data['swipes']|length == 0 %}
@@ -32,6 +33,7 @@
 
                         <td>{{swipe[1]}}</td>                       <!-- quantity -->
                         <td>${{ '%.2f'%(swipe[2]/swipe[1]) }}</td>  <!-- average price per swipe -->
+						<td>${{swipe[2]}}</td>						<!-- total price for listing -->
                         <td><button name="deleteSwipe" value="{{swipe[0]}}">Delete</button></td>
                     </tr>
                 {% endfor %}
