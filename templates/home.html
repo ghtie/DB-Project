@@ -1,9 +1,12 @@
-<!-- html templete for home page-->
+<!-- File: home.html
+     Programmers: Ben Baierl, Drew Heald, Gloria Tie, Madison Lucas
+     This is the html template for the landing page of the online store. -->
 <html>
     <head>
         <title>Triple S: Special Swipe Store.</title>
 		<link rel="stylesheet" href="../static/index.css">
     </head>
+
     <body>
         <div class = "center">
             <pre style="color: black;">
@@ -16,16 +19,21 @@ $$\   $$ |$$\   $$ |$$\   $$ |
 \$$$$$$  |\$$$$$$  |\$$$$$$  |
  \______/  \______/  \______/
             </pre>
+
             <p>Welcome to Triple S: Special Swipe Store</p>
             <p>Do you want to buy or sell your special meal swipes?</p>
 
+            <!-- This form will trigger the method in run_app.py that will render the buyer-view page. -->
             <form action="goToBuyPage" method = "post">
                 <button name = "seeBuyerView" value="goToBuy">Click here if you are a buyer.</button>
             </form>
 
+            <!-- This form will trigger the method in run_app.py that will render the seller-view page. -->
             <form action="goToSellPage" method = "post">
                 <button name = "seeSellerView" value="goToSell">Click here if you are a seller.</button>
             </form>
-           </div> 
+
+        </div> 
     </body>
+
 </html>
