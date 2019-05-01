@@ -1,30 +1,38 @@
+<!-- File: sellerList.html
+     Programmers: Ben Baierl, Drew Heald, Gloria Tie, and Madison Lucas
+     This is the html template to display the swipes already posted by the seller. -->
+
 <!DOCTYPE html>
 <html lang="en">
-<head>
-  <link rel="stylesheet" href="../static/index.css">
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
-  <script type="text/javascript" src="../static/sellerInfo.js"></script>
-  <meta charset="UTF-8">
-  <title>Seller Login</title>
-</head>
-<body>
+  <head>
+    <link rel="stylesheet" href="../static/index.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+    <script type="text/javascript" src="../static/sellerInfo.js"></script>
+    <meta charset="UTF-8">
+    <title>Seller Login</title>
+  </head>
 
-  <div id = "listingInfo">
-    <form action="submitSwipes" method="post">
-      Case ID:<br>
-      <input type="text" name="caseID" id="caseID" value="{{request.form.caseID}}">
-      <br>
-      Quantity:<br>
-      <input type="text" name="quantity" id="quantity" value="{{request.form.quantity}}">
-      <br>
-      Price:<br>
-      <input type="text" name="price" id="price" value="{{request.form.price}}">
-      <br><br>
-      <button name="sendListing" id = "submitSwipeButton">Submit Swipes</button>
-    </form>
-    <form action="landingPage" method="post">
-        <button name="goToLanding" value="goLand">Go to Home Page</button>
-    </form>
-  </div>
-</body>
+  <body>
+    <div id = "listingInfo">
+
+      <!-- This form will trigger the method in run_app.py that posts swipes for sale to the database. -->
+      <form action="submitSwipes" method="post">
+        Case ID:<br>
+        <input type="text" name="caseID" id="caseID" value="{{request.form.caseID}}">
+        <br>
+        Quantity:<br>
+        <input type="text" name="quantity" id="quantity" value="{{request.form.quantity}}">
+        <br>
+        Price:<br>
+        <input type="text" name="price" id="price" value="{{request.form.price}}">
+        <br><br>
+        <button name="sendListing" id = "submitSwipeButton">Submit Swipes</button>
+      </form>
+
+      <!-- This form will trigger the method in run_app.py that will render the landing page. -->
+      <form action="landingPage" method="post">
+          <button name="goToLanding" value="goLand">Go to Home Page</button>
+      </form>
+    </div>
+  </body>
 </html>
