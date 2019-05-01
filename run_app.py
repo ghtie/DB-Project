@@ -40,11 +40,11 @@ def db_write(sql):
 	cursor.close()
 	cnx.close()
 
-#Funtion that inserts into a table
-def db_insert(sql, val):
+#Define function to write to database
+def db_insert(sql,val):
 	cnx = mysql.connector.connect(**config['mysql.connector'])
 	cursor = cnx.cursor()
-	cursor.execute(sql, val)
+	cursor.execute(sql,val)
 	cnx.commit()
 	cursor.close()
 	cnx.close()
@@ -97,19 +97,6 @@ def buy_swipe():
 			buy_view_data = {}
 			return display_swipes_for_buyer(buy_view_data, guest_id_counter=guest_id_counter)
 
-# @app.route('/viewSwipes', methods=['GET', 'POST'])ß
-# def buy_swipe():
-# 		print(request.form)
-# 		if "buy_swipe" in request.form:
-# 			swipe_id = int(request.form["buy_swipe"])
-# 			sql = "delete from swipes where id={swipe_id}".format(swipe_id=swipe_id)
-# 			db_write(sql)
-# 			# newsql = "select user_idß, price from swipes order by price"
-# 			# swipes = db_query(newsql)
-# 			# print(swipes)
-# 			buy_view_data = {}
-# 			return display_swipes(buy_view_data)
-
 def display_swipes_for_buyer(dictionary, guest_id_counter):
 	dictionary = {}
 	sql = "select id, quantity, price from swipes where status=0 order by price"
@@ -128,17 +115,19 @@ def go_to_sell_page():
 	print(request.form)
 	if "seeSellerView" in request.form:
 		return render_template('sellerLogin.html'), 400
-	else:
-		return ''
 
 @app.route('/createListing', methods=['GET', 'POST'])
 def add_seller_info():
 	if "sendSellerInfo" in request.form:
 		name = str(request.form["name"])
 		id = str(request.form["caseID"])
-		sql = "insert into user (name, id) values (%s, %s)"
-		val = (name, id)
-		db_insert(sql, val)
+		sql = "select count(1) from user where ID = '%s'" %(id,)
+		check_duplicate = db_query(sql)
+		print(check_duplicate)
+		if (check_duplicate[0][0] == 0):
+			sql2 = "insert into user (name, ID) values (%s, %s)"
+			val = (name, id)
+			db_insert(sql2, val)
 		return render_template('sellerList.html'), 400
 
 @app.route('/submitSwipes', methods=['GET', 'POST'])
