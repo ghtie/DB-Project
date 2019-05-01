@@ -1,39 +1,48 @@
+<!-- File: sellerView.html
+     Programmers: Ben Baierl, Drew Heald, Gloria Tie, and Madison Lucas
+     This is the html template for the seller-view page of the online store. -->
+
 <!DOCTYPE html>
 <html lang="en">
-<head>
-  <link rel="stylesheet" href="../static/index.css">
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
-  <script type="text/javascript" src="../static/sellerInfo.js"></script>
-  <meta charset="UTF-8">
-  <title>Seller Swipes</title>
-</head>
-<body>
+  <head>
+    <link rel="stylesheet" href="../static/index.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+    <script type="text/javascript" src="../static/sellerInfo.js"></script>
+    <meta charset="UTF-8">
+    <title>Seller Swipes</title>
+  </head>
 
-  <div id = "swipeSellerInfo">
-    <form action="viewSellerSwipes" method="post">
-      <table id="delete">
-          <tr>
-              <th>Quantity</th>
-              <th>Price Per Swipe</th>
-          </tr>
+  <body>
 
-          {% if template_data['swipes']|length == 0 %}
-              <p style="color: red;">No more swipes!</p>
-          {% else %}
-              {% for swipe in template_data['swipes'] %}
-                  <tr>
+    <!-- This form will trigger the method in run_app.py that will re-render the seller-view
+         page when a swipe is poster or a seller logs-in. -->
+    <div id = "swipeSellerInfo">
+      <form action="viewSellerSwipes" method="post">
+        <table id="delete">
+            <tr>
+                <th>Quantity</th>
+                <th>Price Per Swipe</th>
+            </tr>
 
-                      <td>{{swipe[1]}}</td>                      <!-- quantity -->
-                      <td>${{ '%.2f'%(swipe[2]/swipe[1]) }}</td>  <!-- average price per swipe -->
-                      <td><button name="deleteSwipe" value="{{swipe[0]}}">Delete</button></td>
-                  </tr>
-              {% endfor %}
-          {% endif %}
-      </table>
-      </form>
-      <form action="goToListPage" method="post">
-          <button name="goBackToListing" value="goBackToListing">Go to Seller List</button>
-      </form>
-    </div>
-  </body>
+            {% if template_data['swipes']|length == 0 %}
+                <p style="color: red;">No more swipes!</p>
+            {% else %}
+                {% for swipe in template_data['swipes'] %}
+                    <tr>
+
+                        <td>{{swipe[1]}}</td>                       <!-- quantity -->
+                        <td>${{ '%.2f'%(swipe[2]/swipe[1]) }}</td>  <!-- average price per swipe -->
+                        <td><button name="deleteSwipe" value="{{swipe[0]}}">Delete</button></td>
+                    </tr>
+                {% endfor %}
+            {% endif %}
+        </table>
+        </form>
+
+        <!-- This form will trigger the method in run_app.py that will render the landing page. -->
+        <form action="goToListPage" method="post">
+            <button name="goBackToListing" value="goBackToListing">Go to Seller List</button>
+        </form>
+      </div>
+    </body>
   </html>
