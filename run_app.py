@@ -109,12 +109,20 @@ def display_swipes_for_buyer(dictionary, guest_id_counter):
 	print(swipes)
 	return render_template('buyPage.html', template_data=dictionary, dataAvg=dataAvg, dataSum=dataSum, guest_id_counter=guest_id_counter)
 
-
+def display_swipes_for_seller(dictionary, user_id):
+	dictionary = {}
+	sql = "select id, quantity, price, user_id from swipes where user_id = '%s' and status=0 order by price" %(user_id,)
+	swipes = db_query(sql)
+	dictionary['swipes'] = swipes
+	print(swipes)
+	return render_template('sellerView.html', template_data=dictionary, user_id=user_id)
+	
 @app.route('/goToSellPage', methods=['GET', 'POST'])
 def go_to_sell_page():
 	print(request.form)
 	if "seeSellerView" in request.form:
 		return render_template('sellerLogin.html'), 400
+
 
 @app.route('/createListing', methods=['GET', 'POST'])
 def add_seller_info():
@@ -123,23 +131,40 @@ def add_seller_info():
 		id = str(request.form["caseID"])
 		sql = "select count(1) from user where ID = '%s'" %(id,)
 		check_duplicate = db_query(sql)
-		print(check_duplicate)
 		if (check_duplicate[0][0] == 0):
 			sql2 = "insert into user (name, ID) values (%s, %s)"
 			val = (name, id)
 			db_insert(sql2, val)
-		return render_template('sellerList.html'), 400
+		return render_template('sellerList.html', name=name, id=id), 400
 
 @app.route('/submitSwipes', methods=['GET', 'POST'])
 def add_swipe_listing():
+	global user_id
+	user_id = str(request.form["caseID"])
+	seller_view_data = {}
 	if "sendListing" in request.form:
-		id = str(request.form["caseID"])
 		quantity = int(request.form["quantity"])
 		price = Decimal(request.form["price"])
 		sql = "insert into swipes (user_id, price, quantity) values (%s, %s, %s)"
-		val = (id, price, quantity)
+		val = (user_id, price, quantity)
 		db_insert(sql, val)
-		return render_template('sellerLogin.html'), 400
+		return display_swipes_for_seller(seller_view_data, user_id=user_id)
+
+@app.route('/viewSellerSwipes', methods=['GET', 'POST'])
+def view_swipe_listing():
+	if "deleteSwipe" in request.form:
+		swipe_id = int(request.form["deleteSwipe"])
+		print("delete selected %s", user_id)
+		print("delete selected %s", swipe_id)
+		sql = "delete from swipes where ID = %s" %(swipe_id,)
+		db_write(sql)
+		seller_view_data = {}
+		return display_swipes_for_seller(seller_view_data, user_id=user_id)
+
+@app.route('/goToListPage', methods=['GET', 'POST'])
+def go_to_list_page():
+	if "goBackToListing" in request.form:
+		return render_template('sellerList.html'), 400
 
 
 if __name__ == '__main__':
