@@ -40,15 +40,6 @@ def db_write(sql):
 	cursor.close()
 	cnx.close()
 
-#Define function to write to database
-def db_insert(sql,val):
-	cnx = mysql.connector.connect(**config['mysql.connector'])
-	cursor = cnx.cursor()
-	cursor.execute(sql,val)
-	cnx.commit()
-	cursor.close()
-	cnx.close()
-
 @app.route('/')
 def home():
 	return render_template('home.html')
@@ -116,7 +107,7 @@ def display_swipes_for_seller(dictionary, user_id):
 	dictionary['swipes'] = swipes
 	print(swipes)
 	return render_template('sellerView.html', template_data=dictionary, user_id=user_id)
-	
+
 @app.route('/goToSellPage', methods=['GET', 'POST'])
 def go_to_sell_page():
 	print(request.form)
@@ -132,9 +123,9 @@ def add_seller_info():
 		sql = "select count(1) from user where ID = '%s'" %(id,)
 		check_duplicate = db_query(sql)
 		if (check_duplicate[0][0] == 0):
-			sql2 = "insert into user (name, ID) values (%s, %s)"
-			val = (name, id)
-			db_insert(sql2, val)
+			sql2 = "insert into user (name, ID) values ('%s', '%s')" %(name, id)
+			#val = (name, id)
+			db_write(sql2)
 		return render_template('sellerList.html', name=name, id=id), 400
 
 @app.route('/submitSwipes', methods=['GET', 'POST'])
@@ -145,9 +136,9 @@ def add_swipe_listing():
 	if "sendListing" in request.form:
 		quantity = int(request.form["quantity"])
 		price = Decimal(request.form["price"])
-		sql = "insert into swipes (user_id, price, quantity) values (%s, %s, %s)"
-		val = (user_id, price, quantity)
-		db_insert(sql, val)
+		sql = "insert into swipes (user_id, price, quantity) values ('%s', %s, %s)" %(user_id, price, quantity)
+		#val = (user_id, price, quantity)
+		db_write(sql)
 		return display_swipes_for_seller(seller_view_data, user_id=user_id)
 
 @app.route('/viewSellerSwipes', methods=['GET', 'POST'])
