@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <!--<link rel="stylesheet" href="../static/index.css">-->
+  <link rel="stylesheet" href="../static/index.css">
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
   <script type="text/javascript" src="../static/sellerInfo.js"></script>
   <meta charset="UTF-8">
@@ -21,6 +21,9 @@
       <input type="text" name="price" id="price" value="{{request.form.price}}">
       <br><br>
       <button name="sendListing" id = "submitSwipeButton">Submit Swipes</button>
+    </form>
+    <form action="landingPage" method="post">
+        <button name="goToLanding" value="goLand">Go to Home Page</button>
     </form>
   </div>
 </body>

@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <link rel="stylesheet" href="../static/index.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+  <script type="text/javascript" src="../static/sellerInfo.js"></script>
+  <meta charset="UTF-8">
+  <title>Seller Swipes</title>
+</head>
+<body>
+
+  <div id = "swipeSellerInfo">
+    <form action="viewSellerSwipes" method="post">
+      <table id="delete">
+          <tr>
+              <th>Quantity</th>
+              <th>Price Per Swipe</th>
+          </tr>
+
+          {% if template_data['swipes']|length == 0 %}
+              <p style="color: red;">No more swipes!</p>
+          {% else %}
+              {% for swipe in template_data['swipes'] %}
+                  <tr>
+
+                      <td>{{swipe[1]}}</td>                      <!-- quantity -->
+                      <td>${{ '%.2f'%(swipe[2]/swipe[1]) }}</td>  <!-- average price per swipe -->
+                      <td><button name="deleteSwipe" value="{{swipe[0]}}">Delete</button></td>
+                  </tr>
+              {% endfor %}
+          {% endif %}
+      </table>
+      </form>
+      <form action="goToListPage" method="post">
+          <button name="goBackToListing" value="goBackToListing">Go to Seller List</button>
+      </form>
+    </div>
+  </body>
+  </html>
