@@ -1,19 +1,39 @@
 /* File: buyPage.html
    Programmers: Ben Baierl, Drew Heald, Gloria Tie, and Madison Lucas
    This is the CSS specifications to format all the HTML templates. */
-   
-header {
+   * { box-sizing: border-box }
+
+   body{
+     margin:0;
+     padding:0;
+     color: white;
+     font-family:sans-serif;
+     font-size:160%;
+   }
+   div{
+       padding: 4% 10%;
+   }
+   footer{
+     background-color:#E2E0CA;
+     min-height: 40px;
+   }
+   .one{
+     background-color: #013A6B;
+     background-image: -webkit-linear-gradient(30deg, #106576 50%, #12C9C8 50%);
+     min-height: 100%;
+   }
+/* header {
   font-family: sans-serif;
   font: Avantgarde;
   font-weight: bold;
   color: #FFF8F0;
-}
+} */
 
 body {
   font-family: sans-serif;
   font-weight: lighter;
   font-size: 14px;
-  background-color: #9DD9D2;
+  background-color: #E2E0CA;
   padding-top: 35px;
 }
 
