@@ -72,8 +72,18 @@ pre {
 }
 
 .center {
-  /*margin-left: auto;
-  margin-right: auto;
-  margin: auto;*/
   text-align: center;
+}
+
+#login {
+  border: 1px solid;
+  padding: 10px;
+  border-radius: 10px;
+  box-shadow: 5px 10px;
+  background-color: #106576;
+  color: white;
+}
+
+input[type=text] {
+  border-radius: 5px;
 }
