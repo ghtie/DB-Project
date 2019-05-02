@@ -28,7 +28,11 @@
         $<input type="text" name="price" id="price" value="{{request.form.price}}">
         <br><br>
         <button name="sendListing" id = "submitSwipeButton">Submit Swipes</button>
+		<br><br>
+		<button name="goToMySwipes" id="goSwipesButton">View Your Swipes for Sale</button>
       </form>
+
+
 
       <!-- This form will trigger the method in run_app.py that will render the landing page. -->
       <form action="landingPage" method="post">

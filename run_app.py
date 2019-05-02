@@ -8,7 +8,7 @@ from decimal import Decimal
 
 import configparser
 from flask import Flask, render_template, Response, request, redirect, url_for
-from wtforms import Form, BooleanField, StringField, PasswordField, validators
+#from wtforms import Form, BooleanField, StringField, PasswordField, validators
 import mysql.connector
 
 # This reads the configuration from file corresponding file.
@@ -149,13 +149,24 @@ def add_swipe_listing():
 	global user_id
 	user_id = str(request.form["caseID"])
 	seller_view_data = {}
+	if "goToMySwipes" in request.form:
+		if(user_id != ""):
+			return display_swipes_for_seller(seller_view_data, user_id=user_id)
+		else:
+			return render_template('sellerList.html'), 400
 	if "sendListing" in request.form:
-		quantity = int(request.form["quantity"])
-		price = Decimal(request.form["price"])
+		err1 = str(request.form["quantity"])
+		err2 = str(request.form["price"])
 		#Error checking
-		sql = "insert into swipes (user_id, price, quantity) values ('%s', %s, %s)" %(user_id, price, quantity)
-		db_write(sql)
-		return display_swipes_for_seller(seller_view_data, user_id=user_id)
+		if (err1 != "" and err2 != "" and err1.isdigit() and (err2.isdigit() or err2.replace('.','',1).isdigit())):
+			print(err2.replace('.','',1).isdigit())
+			quantity = int(request.form["quantity"])
+			price = Decimal(request.form["price"])
+			sql = "insert into swipes (user_id, price, quantity) values ('%s', %s, %s)" %(user_id, price, quantity)
+			db_write(sql)
+			return display_swipes_for_seller(seller_view_data, user_id=user_id)
+		else:
+			return render_template('sellerList.html'), 400
 
 # This is the route to display the swipes a particular seller has posted.
 @app.route('/viewSellerSwipes', methods=['GET', 'POST'])
