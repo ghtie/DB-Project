@@ -44,9 +44,9 @@ td, th {
   padding: 8px;
 }
 
-tr:nth-child(even){background-color: #AEDCC0;}
+tr:nth-child(even){background-color: #transparent;}
 tr:nth-child(odd){background-color: #7BD389;}
-tr:hover {background-color: #4AD361;}
+tr:hover {background-color: #e3e3e3;}
 
 th {
   padding-top: 12px;
