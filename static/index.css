@@ -16,8 +16,12 @@ body {
   font-family: sans-serif;
   font-weight: lighter;
   font-size: 14px;
-  color: white;
+  color: black;
   background-color: #12C9C8;
+}
+
+table, td, th{
+  border: 1px solid black;
 }
 
 table {
@@ -28,20 +32,19 @@ table {
 }
 
 td, th {
-  border: 1px solid #ddd;
   padding: 8px;
 }
 
-tr:nth-child(even){background-color: LightSlateGrey;}
-tr:nth-child(odd){background-color: #a8b3bd;}
-tr:hover {background-color: #d3d9de;}
+tr:nth-child(even){background-color: #AEDCC0;}
+tr:nth-child(odd){background-color: #7BD389;}
+tr:hover {background-color: #4AD361;}
 
 th {
   padding-top: 12px;
   padding-bottom: 12px;
   text-align: left;
-  background-color: DarkSlateGray;
-  color: White;
+  background-color: #343E3D;
+  color: black;
 }
 
 button {
