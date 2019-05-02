@@ -1,0 +1,51 @@
+<!-- File: sellerView.html
+     Programmers: Ben Baierl, Drew Heald, Gloria Tie, and Madison Lucas
+     This is the html template for the seller-view page of the online store. -->
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <link rel="stylesheet" href="../static/index.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+    <script type="text/javascript" src="../static/sellerInfo.js"></script>
+    <meta charset="UTF-8">
+    <title>Seller Swipes</title>
+  </head>
+
+  <body>
+
+    <!-- This form will trigger the method in run_app.py that will re-render the seller-view
+         page when a swipe is poster or a seller logs-in. -->
+    <div id = "swipeSellerInfo" class = center>
+	<h1>Here are your listed swipes!</h1>
+	
+      <form action="viewSellerSwipes" method="post">
+        <table id="delete">
+            <tr>
+                <th>Quantity</th>
+                <th>Price Per Swipe</th>
+				<th>Total Price</th>
+            </tr>
+
+            {% if template_data['swipes']|length == 0 %}
+                <p style="color: red;">No more swipes!</p>
+            {% else %}
+                {% for swipe in template_data['swipes'] %}
+                    <tr>
+
+                        <td>{{swipe[1]}}</td>                       <!-- quantity -->
+                        <td>${{ '%.2f'%(swipe[2]/swipe[1]) }}</td>  <!-- average price per swipe -->
+						<td>${{swipe[2]}}</td>						<!-- total price for listing -->
+                    </tr>
+                {% endfor %}
+            {% endif %}
+        </table>
+        </form>
+
+        <!-- This form will trigger the method in run_app.py that will render the buying page. -->
+        <form action="backToBuy" method="post">
+            <button name="seeBuyerView" value="goBackToListing">Go Back to Listings</button>
+        </form>
+      </div>
+    </body>
+  </html>

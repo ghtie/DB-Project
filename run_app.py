@@ -22,6 +22,7 @@ app = Flask(__name__)
 # landing page (keeps track of guest_user_id's).
 guest_id_counter = -1
 
+# This is a global variabe that updates when someone logs in to the buying page(keeps track of buyer CWRU network ID).
 guest_case_id = ""
 
 # This acts as a boolean global variable that is 1 (inital entry into buy page) or 0 (buyer
@@ -94,6 +95,12 @@ def go_to_buy_page():
 @app.route('/viewSwipes', methods=['GET', 'POST'])
 def buy_swipe():
 		print(request.form)
+		if "goToMyBoughtSwipes" in request.form:
+			dictionary = {}
+			sql = "select name, quantity, price, s.ID from guest_user g inner join swipes s on g.ID = s.guest_user_id where name = '%s'" %(guest_case_id)
+			swipes = db_query(sql)
+			dictionary['swipes'] = swipes
+			return render_template('buyerView.html', template_data=dictionary, user_id=guest_case_id)
 		if "buy_swipe" in request.form:
 			global guest_id_counter
 			swipe_id = int(request.form["buy_swipe"])
@@ -108,6 +115,15 @@ def buy_swipe():
 			db_write(sql3)
 			buy_view_data = {}
 			return display_swipes_for_buyer(buy_view_data, guest_id_counter=guest_id_counter, guest_case_id=guest_case_id)
+
+# This is the route to redisplay the buyer view after viewing past purchases.
+@app.route('/backToBuy', methods=['GET', 'POST'])
+def return_to_buy():
+	print(request.form)
+	if "seeBuyerView" in request.form:
+		buy_view_data = {}
+		return display_swipes_for_buyer(buy_view_data, guest_id_counter=guest_id_counter, guest_case_id=guest_case_id)
+		
 
 # This is a helper method to display the list of swipes on the buyer view page.
 def display_swipes_for_buyer(dictionary, guest_id_counter, guest_case_id):

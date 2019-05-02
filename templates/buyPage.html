@@ -4,10 +4,10 @@
 <html>
     <head>
         <title>Buyer View</title>
-        <div class = "center">
                 <h1> Buy your swipes here!</h1>
                 <link rel="stylesheet" href="../static/index.css">
-    </head>
+    </head> 
+	<body>
 
             <!-- This form will trigger the method in run_app.py that will re-render the buyer-view
                  page when a swipe is purchased. -->
@@ -43,6 +43,7 @@
                     {% endif %}
 
                 </table> 
+				<button name="goToMyBoughtSwipes" id="goSwipesButton2">View Your Purchase History</button>
             </form>
 
             <!-- This form will trigger the method in run_app.py that will render the landing page. -->
@@ -50,5 +51,6 @@
                 <button name="goToLanding" value="goLand">Go to Home Page</button>
             </form>
         </div>
+		</body>
 </html>
     
