@@ -14,9 +14,14 @@
             <form action="viewSwipes" method ="post">
 
                 <p>Your Buyer ID is: #{{ guest_id_counter}}</p>
-				<p>Your Case ID is: {{ guest_case_id}}</p>
-                <p>Average Price of Swipe for Sale: ${{ '%.2f'%dataAvg }}</p>
-                <p>Total Number of Swipes for Sale: {{ dataSum }}</p>
+                <p>Your Case ID is: {{ guest_case_id}}</p>  
+                
+                {% if template_data['swipes']|length == 0 %}
+                        <p style="color: red;">No more swipes!</p>
+                {% else %}
+                
+                    <p>Average Price of Swipe for Sale: ${{ '%.2f'%dataAvg }}</p>
+                    <p>Total Number of Swipes for Sale: {{ dataSum }}</p>
 
                 <table id="buy">
                     <tr>
@@ -26,10 +31,6 @@
                         <th>Total Price</th>
                         <th>Purchase</th>
                     </tr>
-
-                    {% if template_data['swipes']|length == 0 %}
-                        <p style="color: red;">No more swipes!</p>
-                    {% else %}
                         {% for swipe in template_data['swipes'] %}
                             <tr>
                                 <td>{{ swipe[0]}}</td>                      <!-- swipe_id -->
