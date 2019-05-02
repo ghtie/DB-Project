@@ -14,6 +14,7 @@
             <form action="viewSwipes" method ="post">
 
                 <p>Your Buyer ID is: #{{ guest_id_counter}}</p>
+				<p>Your Case ID is: {{ guest_case_id}}</p>
                 <p>Average Price of Swipe for Sale: ${{ '%.2f'%dataAvg }}</p>
                 <p>Total Number of Swipes for Sale: {{ dataSum }}</p>
 
